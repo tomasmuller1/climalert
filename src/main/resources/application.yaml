@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: climalert
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+weatherapi:
+  base-url: https://api.weatherapi.com/v1
+  api-key: ${WEATHER_API_KEY}
+
+climalert:
+  ubicacion: "Buenos Aires"
+  alerta:
+    temperatura-umbral: 35
+    humedad-umbral: 60
+    destinatarios: admin@clima.com,emergencias@clima.com,meteorologia@clima.com
+  scheduler:
+    recoleccion:
+      fixed-rate: 300000
+    evaluacion:
+      fixed-rate: 60000

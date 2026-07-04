@@ -1,0 +1,36 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class RegistroClimatico {
+    - id: Long
+    - ciudad: String
+    - temperaturaC: Double
+    - humedad: Double
+    - condicion: String
+    - fechaHora: LocalDateTime
+    - evaluado: boolean
+
+    + marcarComoEvaluado(): void
+}
+
+class EvaluadorClimatico {
+    - regla: ReglaAlerta
+
+    + hayAlerta(RegistroClimatico): boolean
+}
+
+interface ReglaAlerta {
+    + esAlerta(RegistroClimatico): boolean
+}
+
+class ReglaTemperaturaHumedadAlta implements ReglaAlerta {
+    - temperaturaUmbral: double
+    - humedadUmbral: double
+    + esAlerta(RegistroClimatico): boolean
+}
+
+EvaluadorClimatico -> ReglaAlerta
+EvaluadorClimatico ..> RegistroClimatico
+ReglaTemperaturaHumedadAlta ..> RegistroClimatico
+
+@enduml
